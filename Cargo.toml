@@ -1,0 +1,23 @@
+[package]
+name = "rust_streamz"
+version = "0.1.0"
+edition = "2021"
+
+[features]
+default = []
+requests = ["dep:reqwest", "dep:serde"]
+websockets = ["dep:tokio-tungstenite"]
+example = ["websockets", "dep:serde_json"]
+
+[dependencies]
+anyhow = "1"
+futures-util = "0.3"
+serde = { version = "1", features = ["derive"], optional = true }
+serde_json = { version = "1", optional = true }
+tokio = { version = "1", features = ["rt", "macros", "signal", "time"] }
+tokio-tungstenite = { version = "0.27", features = ["native-tls"], optional = true }
+reqwest = { version = "0.12", features = ["json", "gzip"], optional = true }
+
+[[example]]
+name = "deribit_trade_classifier"
+required-features = ["example"]
